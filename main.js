@@ -98,7 +98,7 @@ let variable_nula = null;
 
 console.log("El nulo es: ", variable_nula);
 
-let color = prompt("Ingresa un color: ");;
+let color = prompt("Ingresa un color: ");
 
 switch (color) {
     case "verde":
