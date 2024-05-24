@@ -32,8 +32,9 @@ let objetos = {
     apellido: "Hernández",
     estatura: 1.80
 }
-let arreglo = [150, 200, 58, 96, 410];
+let arreglo = [150, 200, 58, 96, 410, 6];
 
+console.log("Longitud de arreglo:", arreglo.length);
 
 /* Operadores básicos */
 /* aritmeticos */
@@ -98,7 +99,9 @@ let variable_nula = null;
 
 console.log("El nulo es: ", variable_nula);
 
-let color = prompt("Ingresa un color: ");
+/* Entrada de datos desde alert o ventana emergente */
+//let color = prompt("Ingresa un color: ");
+let color = "verde";
 
 switch (color) {
     case "verde":
@@ -114,3 +117,83 @@ switch (color) {
         console.log("No es un color válido");
         break;
 }
+
+/* Estructuras de control de repetición */
+
+/* WHILE */
+
+let conde = 0;
+
+while (conde < 10) {
+    console.log("El valor del conde: ", conde);
+
+    /*  conde = conde + 1;
+     conde += 1; */
+    conde++;
+}
+
+/* DO WHILE */
+
+let condeAlt = 0;
+
+console.log("DO WHILE")
+
+do {
+    console.log("El valor del conde: ", condeAlt);
+    condeAlt = condeAlt + 1;
+} while (condeAlt < 10)
+
+/* FOR */
+
+for (let index = 0; index < 10; index++) {
+    console.log("Valor de index:", index);
+}
+
+console.log("FOR IN:")
+
+let objeto = {
+    nombre: "Raul",
+    apellido: "Hernández",
+    estatura: 1.80
+}
+
+for (let propiedad in objeto) {
+    console.log("Propiedad:", propiedad);
+    console.log("Valor:", objeto[propiedad]);
+}
+
+console.log("FOR OF:")
+
+let arregloAlt = [150, 200, 58, 96, 410, 6];
+
+for (let elemento of arregloAlt) {
+    console.log("Elemento:", elemento);
+}
+
+console.log("FOR EACH:")
+
+arreglo.forEach(elemento => console.log("Elemento:", elemento));
+
+
+/* Ejemplo acumulador */
+
+
+let precios = [100, 95, 62, 25, 30];
+
+/* ¿Cuanto es el total de la compra? */
+
+let subtotal = 0;
+
+/* Como funciona un acumulador */
+/* Como recorro un arreglo o lista con un for clásico */
+
+for (let i = 0; i < precios.length; i++) {
+    subtotal = subtotal + precios[i];
+}
+
+console.log("subtotal:", subtotal);
+
+
+miPrimerFuncion();
+
+
