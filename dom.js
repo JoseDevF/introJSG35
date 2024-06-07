@@ -90,6 +90,7 @@ function submitHandler(e) {
     let loginFlag = null; //falsy
 
     /* componente funcional */
+
     function renderingBalance(obj) {
         let template = `
         <div class="mt-5">
@@ -98,18 +99,34 @@ function submitHandler(e) {
 
             <div class="my-3 col-4">
                 <label for="usuario" class="form-label">Incrementar saldo</label>
-                <input name="saldo" type="number" min="0" class="form-control" id="input_saldo">
+                <input id="input_balance" name="saldo" type="number" min="0" class="form-control" id="input_saldo">
             </div>
             
             <button id="add_balance_btn" class="btn btn-primary mt-5">agregar saldo</button>
+
+            <button id="number_1" class="btn btn-primary mt-5">1</button>
         </div>
         `
+
 
         homeSection.innerHTML = template;
 
         const addBalanceButton = document.querySelector("#add_balance_btn");
+        /* Manipulación del input value */
+        const number1 = document.querySelector("#number_1");
+        const inputBalance = document.querySelector("#input_balance");
+
+        /* Manipulación del input value */
+        number1.addEventListener("click", () => {
+            const valor_previo = inputBalance.value.toString();
+            inputBalance.value = valor_previo + 1;
+        })
 
         addBalanceButton.addEventListener("click", addBalanceHandler);
+        inputBalance.addEventListener("input", (e) => {
+            console.log("Balance:", e.target.value);
+        });
+
     }
 
     function addBalanceHandler(e) {
