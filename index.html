@@ -90,18 +90,27 @@
         <button id="send_button" type="button" class="btn btn-primary">Primary</button>
     </section> -->
 
-    <section>
-        <form id="credenciales" action="">
-            <div class="mb-3">
+    <!-- Login -->
+    <section id="login_sec" class="bg-dark py-5 text-center">
+        <form class="row text-white justify-content-center" id="credenciales" action="">
+            <div class="mb-3 col-4">
                 <label for="usuario" class="form-label">Usuario</label>
                 <input name="user" type="text" class="form-control" id="usuario">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-4">
                 <label for="contrasenia" class="form-label">Password</label>
                 <input name="password" type="password" class="form-control" id="contrasenia">
             </div>
-            <button id="send_button" type="submit" class="btn btn-primary">Iniciar sesión</button>
         </form>
+        <button form="credenciales" id="send_button" type="submit" class="btn btn-primary mt-5">Iniciar sesión</button>
+    </section>
+
+    <!-- Home -->
+    <section class="d-none" id="home_sec">
+        <h1>Hola, bienvenido!</h1>
+        <div id="saldo">
+
+        </div>
     </section>
 </body>
 

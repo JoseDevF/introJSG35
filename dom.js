@@ -70,15 +70,107 @@ const formulario = document.querySelector("#credenciales");
 
 formulario.addEventListener("submit", submitHandler)
 
-const users = [
-    { name: "John", password: "4d5s6a4d5s6ad" },
-    { name: "John", password: "4d5s6a4d5s6ad" },
-    { name: "John", password: "4d5s6a4d5s6ad" }
-]
+const accounts = [
+    { mail: "mali@gmail.com", balance: 900, password: "123456" },
+    { mail: "joss@hotmail.com", balance: 350, password: "password" },
+    { mail: "alex@outlook.com.mx", balance: 700, password: "jkhkl" },
+    { mail: "andrea@gmail.com", balance: 700, password: "123456" },
+];
 
 
 function submitHandler(e) {
     e.preventDefault();
-    console.log("Usuario:", e.target.user.value);
-    //console.log("Password:", e.target.password.value);
+
+    const loginSection = document.querySelector("#login_sec")
+    const homeSection = document.querySelector("#home_sec")
+    const balanceContainer = document.querySelector("#saldo")
+    const user = e.target.user.value;
+    const password = e.target.password.value;
+    //let loginFlag = false;
+    let loginFlag = null; //falsy
+
+    /* componente funcional */
+    function renderingBalance(obj) {
+        let template = `
+        <div class="mt-5">
+            <h1>Bienvenido de nuevo ${obj.mail}</h1>
+            <h2>Saldo ${obj.balance}</h2>
+
+            <div class="my-3 col-4">
+                <label for="usuario" class="form-label">Incrementar saldo</label>
+                <input name="saldo" type="number" min="0" class="form-control" id="input_saldo">
+            </div>
+            
+            <button id="add_balance_btn" class="btn btn-primary mt-5">agregar saldo</button>
+        </div>
+        `
+
+        homeSection.innerHTML = template;
+
+        const addBalanceButton = document.querySelector("#add_balance_btn");
+
+        addBalanceButton.addEventListener("click", addBalanceHandler);
+    }
+
+    function addBalanceHandler(e) {
+
+        const addBalanceInput = document.querySelector("#input_saldo");
+        const current = localStorage.getItem("balance");
+
+        let newBalance = parseInt(current) + parseInt(addBalanceInput.value);
+
+        localStorage.setItem("balance", newBalance);
+
+        const mail = localStorage.getItem("mail");
+        const balance = localStorage.getItem("balance");
+
+        renderingBalance({ mail: mail, balance: balance });
+
+    }
+
+    function loginSuccessfully(obj) {
+        console.log("Login Successfully");
+
+        /* for in */
+        localStorage.setItem("mail", obj.mail);
+        localStorage.setItem("password", obj.password);
+        localStorage.setItem("balance", obj.balance);
+
+        /* Lo ideal es hacer el redireccionamiento */
+
+        console.log(localStorage.getItem("mail"));
+
+        loginSection.style.display = "none";//ocultate
+        homeSection.classList = "";//muestraste
+
+        /* Renderizado clásico */
+        let parrafo = document.createElement("h2")
+
+        parrafo.innerText = "Saldo: " + obj.balance;
+        parrafo.style.color = "black";
+
+        balanceContainer.appendChild(parrafo);
+
+        /* Renderizado con string templates */
+        renderingBalance(obj);
+    }
+
+    for (let i = 0; i < accounts.length; i++) {
+
+        /* Sintaxis  */
+        accounts[i].mail === user && accounts[i].password === password ?
+            loginFlag = accounts[i]
+            : null;
+
+        /* Son equivalentes */
+        /* accounts[i].mail === user && accounts[i].password === password ? loginFlag = true : null; */
+
+        /*  if (accounts[i].mail === user && accounts[i].password) {
+             loginSuccessfully()
+         } else {
+             alert("Usuario o contraseña incorrecto");
+         } */
+    }
+
+    loginFlag !== null ? loginSuccessfully(loginFlag) : alert("Usuario o contraseña incorrecto");
 }
